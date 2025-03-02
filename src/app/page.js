@@ -14,8 +14,8 @@ const ExpandingName = () => {
       className="text-4xl font-bold cursor-pointer"
       onClick={handleClick}
     >
-      <div className="relative h-[1.5em]">
-        <span className={`absolute transition-all duration-700 ease-in-out ${
+      <div className="relative h-[1.5em] flex justify-center sm:justify-start"> {/* Added flex and justify classes */}
+        <span className={`transition-all duration-700 ease-in-out ${
           isExpanded ? 'opacity-0 transform -translate-y-2' : 'opacity-100 transform translate-y-0'
         }`}>
           {`NNS`}
@@ -73,6 +73,12 @@ export default function Home() {
             className="rounded-full border border-solid border-transparent transition-all flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] hover:text-white dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
             href="#projects"
           >
+            {`About Us`}
+          </a>
+          <a
+            className="rounded-full border border-solid border-transparent transition-all flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] hover:text-white dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
+            href="#projects"
+          >
             {`View Our Projects`}
           </a>
           <a
@@ -99,7 +105,7 @@ export default function Home() {
         </a>
         <a
           className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://github.com/your-github-org"
+          href="https://github.com/nns-development"
           target="_blank"
           rel="noopener noreferrer"
         >
