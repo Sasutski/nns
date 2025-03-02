@@ -3,51 +3,56 @@ import Image from "next/image";
 import { useState } from 'react';
 
 const ExpandingName = () => {
-  const [activeIndex, setActiveIndex] = useState(null);
+  const [isExpanded, setIsExpanded] = useState(false);
 
-  const handleClick = (index) => {
-    if (activeIndex === index) {
-      setActiveIndex(null);
-    } else {
-      setActiveIndex(index);
-    }
+  const handleClick = () => {
+    setIsExpanded(!isExpanded);
   };
 
   return (
-    <div className="text-4xl font-bold flex">
-      {/* First N */}
-      <div 
-        className={`group cursor-pointer relative transition-opacity duration-500 ${activeIndex === 0 ? 'active' : ''}`}
-        onClick={() => handleClick(0)}
-      >
-        <span>N</span>
-        <span className="inline-flex overflow-hidden max-w-0 transition-all duration-500 ease-in-out group-[.active]:max-w-[300px] opacity-50 group-[.active]:opacity-100">
-          {`oobgrinder420`}
+    <div 
+      className="text-4xl font-bold cursor-pointer"
+      onClick={handleClick}
+    >
+      <div className="relative h-[1.5em]">
+        <span className={`absolute transition-all duration-700 ease-in-out ${
+          isExpanded ? 'opacity-0 transform -translate-y-2' : 'opacity-100 transform translate-y-0'
+        }`}>
+          {`NNS`}
         </span>
       </div>
-      {/* Second N */}
-      <div 
-        className={`group cursor-pointer relative transition-opacity duration-500 ${activeIndex === 1 ? 'active' : ''}`}
-        onClick={() => handleClick(1)}
+      <div className={`flex flex-col gap-2 transition-all duration-700 ease-in-out overflow-hidden
+        ${isExpanded ? 'max-h-[200px] opacity-100 mt-2 transform translate-y-0' : 'max-h-0 opacity-0 mt-0 transform -translate-y-4'}`}
       >
-        <span>N</span>
-        <span className="inline-flex overflow-hidden max-w-0 transition-all duration-500 ease-in-out group-[.active]:max-w-[300px] opacity-50 group-[.active]:opacity-100">
-          {`atalie`}
-        </span>
-      </div>
-      {/* S */}
-      <div 
-        className={`group cursor-pointer relative transition-opacity duration-500 ${activeIndex === 2 ? 'active' : ''}`}
-        onClick={() => handleClick(2)}
-      >
-        <span>S</span>
-        <span className="inline-flex overflow-hidden max-w-0 transition-all duration-500 ease-in-out group-[.active]:max-w-[300px] opacity-50 group-[.active]:opacity-100">
-          {`asutski`}
-        </span>
+        <div className="flex">
+          <span>N</span>
+          <span className={`transition-all duration-700 ease-in-out overflow-hidden whitespace-nowrap
+            ${isExpanded ? 'max-w-[300px] opacity-100 transform translate-x-0' : 'max-w-0 opacity-0 transform -translate-x-4'}`}
+          >
+            {`oobGrinder420`}
+          </span>
+        </div>
+        <div className="flex">
+          <span>N</span>
+          <span className={`transition-all duration-700 ease-in-out overflow-hidden whitespace-nowrap
+            ${isExpanded ? 'max-w-[300px] opacity-100 transform translate-x-0 delay-[100ms]' : 'max-w-0 opacity-0 transform -translate-x-4'}`}
+          >
+            {`atalie`}
+          </span>
+        </div>
+        <div className="flex">
+          <span>S</span>
+          <span className={`transition-all duration-700 ease-in-out overflow-hidden whitespace-nowrap
+            ${isExpanded ? 'max-w-[300px] opacity-100 transform translate-x-0 delay-[200ms]' : 'max-w-0 opacity-0 transform -translate-x-4'}`}
+          >
+            {`asutski`}
+          </span>
+        </div>
       </div>
     </div>
   );
 };
+
 export default function Home() {
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
