@@ -1,5 +1,8 @@
+// nns/src/app/page.js
 "use client";
 import { useState } from 'react';
+import Link from 'next/link';
+import Footer from '@/components/Footer';
 
 const ExpandingName = () => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -14,7 +17,7 @@ const ExpandingName = () => {
       onClick={handleClick}
     >
       <div className="relative h-[1.5em] flex justify-center sm:justify-start"> {/* Added flex and justify classes */}
-        <span className={`transition-all duration-700 ease-in-out ${
+        <span className={`transition-all duration-700 ease-in-out hover:text-gray-800 hover:underline hover:underline-offset-4 hover:cursor-pointer ${
           isExpanded ? 'opacity-0 transform -translate-y-2' : 'opacity-100 transform translate-y-0'
         }`}>
           {`NNS`}
@@ -68,49 +71,19 @@ export default function Home() {
         </div>
 
         <div className="flex gap-4 items-center flex-col sm:flex-row mt-4">
-          <a
-            className="rounded-full border border-solid border-transparent transition-all flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] hover:text-white dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="#projects"
-          >
+          <Link href="/about" className="rounded-full border border-solid border-transparent transition-all flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] hover:text-white dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5">
             {`About Us`}
-          </a>
-          <a
-            className="rounded-full border border-solid border-transparent transition-all flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] hover:text-white dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="#projects"
-          >
+          </Link>
+          <Link href="/projects" className="rounded-full border border-solid border-transparent transition-all flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] hover:text-white dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5">
             {`View Our Projects`}
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="#contact"
-          >
+          </Link>
+          <Link href="/contact" className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44">
             {`Get in Touch`}
-          </a>
+          </Link>
         </div>
       </main>
 
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="#about"
-        >
-          {`About Us`}
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="#projects"
-        >
-          {`Projects`}
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://github.com/nns-development"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {`GitHub →`}
-        </a>
-      </footer>
+      <Footer />
     </div>
   );
 }
