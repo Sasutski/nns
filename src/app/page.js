@@ -1,9 +1,9 @@
-// nns/src/app/page.js
 "use client";
 import { useState } from 'react';
 import Link from 'next/link';
 import Footer from '@/components/Footer';
 import GameOfLife from '@/components/GameOfLife';
+import { motion } from 'framer-motion';
 
 const ExpandingName = () => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -13,50 +13,65 @@ const ExpandingName = () => {
   };
 
   return (
-    <div 
+    <motion.div 
       className="text-4xl font-bold cursor-pointer"
       onClick={handleClick}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
     >
-      <div className="relative h-[1.5em] flex justify-center sm:justify-start"> {/* Added flex and justify classes */}
-        <span className={`transition-all duration-700 ease-in-out hover:text-gray-800 hover:underline hover:underline-offset-4 hover:cursor-pointer ${
-          isExpanded ? 'opacity-0 transform -translate-y-2' : 'opacity-100 transform translate-y-0'
-        }`}>
+      <div className="relative h-[1.5em] flex justify-center sm:justify-start">
+        <motion.span 
+          className={`transition-all duration-700 ease-in-out hover:text-gray-800 hover:underline hover:underline-offset-4 hover:cursor-pointer`}
+          animate={{
+            opacity: isExpanded ? 0 : 1,
+            y: isExpanded ? -8 : 0
+          }}
+          transition={{ duration: 0.7 }}
+        >
           {`NNS`}
-        </span>
+        </motion.span>
       </div>
-      <div className={`flex flex-col gap-2 transition-all duration-700 ease-in-out overflow-hidden
-        ${isExpanded ? 'max-h-[200px] opacity-100 mt-2 transform translate-y-0' : 'max-h-0 opacity-0 mt-0 transform -translate-y-4'}`}
+      <motion.div 
+        className="flex flex-col gap-2"
+        initial={false}
+        animate={{
+          height: isExpanded ? 'auto' : 0,
+          opacity: isExpanded ? 1 : 0
+        }}
+        transition={{ duration: 0.7 }}
       >
-        <div className="flex">
-          <span>N</span>
-          <span className={`transition-all duration-700 ease-in-out overflow-hidden whitespace-nowrap
-            ${isExpanded ? 'max-w-[300px] opacity-100 transform translate-x-0' : 'max-w-0 opacity-0 transform -translate-x-4'}`}
+        {['NoobGrinder420', 'Natalie', 'Sasutski'].map((name, index) => (
+          <motion.div
+            key={name}
+            className="flex"
+            initial={{ x: -20, opacity: 0 }}
+            animate={{ 
+              x: isExpanded ? 0 : -20, 
+              opacity: isExpanded ? 1 : 0 
+            }}
+            transition={{ 
+              duration: 0.7,
+              delay: isExpanded ? index * 0.1 : 0 
+            }}
           >
-            {`oobGrinder420`}
-          </span>
-        </div>
-        <div className="flex">
-          <span>N</span>
-          <span className={`transition-all duration-700 ease-in-out overflow-hidden whitespace-nowrap
-            ${isExpanded ? 'max-w-[300px] opacity-100 transform translate-x-0 delay-[100ms]' : 'max-w-0 opacity-0 transform -translate-x-4'}`}
-          >
-            {`atalie`}
-          </span>
-        </div>
-        <div className="flex">
-          <span>S</span>
-          <span className={`transition-all duration-700 ease-in-out overflow-hidden whitespace-nowrap
-            ${isExpanded ? 'max-w-[300px] opacity-100 transform translate-x-0 delay-[200ms]' : 'max-w-0 opacity-0 transform -translate-x-4'}`}
-          >
-            {`asutski`}
-          </span>
-        </div>
-      </div>
-    </div>
+            <span>{name[0]}</span>
+            <span>{name.slice(1)}</span>
+          </motion.div>
+        ))}
+      </motion.div>
+    </motion.div>
   );
 };
 
 export default function Home() {
+  const buttonVariants = {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    hover: { scale: 1.05 },
+    tap: { scale: 0.95 }
+  };
+
   return (
     <div className="relative min-h-screen">
       <GameOfLife />
@@ -64,26 +79,56 @@ export default function Home() {
         <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
           <ExpandingName />
           
-          <div className="max-w-2xl text-center sm:text-left">
-            <h1 className="text-2xl mb-4">{`Building Useful Projects for the World`}</h1>
+          <motion.div 
+            className="max-w-2xl text-center sm:text-left"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <h1 className="text-2xl mb-4">Building Useful Projects for the World</h1>
             <p className="text-gray-600 dark:text-gray-300">
               {`We're a small team passionate about creating meaningful solutions 
               through technology. Our projects aim to make a positive impact 
               in people's lives.`}
             </p>
-          </div>
+          </motion.div>
 
-          <div className="flex gap-4 items-center flex-col sm:flex-row mt-4">
-            <Link href="/about" className="rounded-full border border-solid border-transparent transition-all flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] hover:text-white dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5">
-              {`About Us`}
-            </Link>
-            <Link href="/projects" className="rounded-full border border-solid border-transparent transition-all flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] hover:text-white dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5">
-              {`View Our Projects`}
-            </Link>
-            <Link href="/contact" className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44">
-              {`Get in Touch`}
-            </Link>
-          </div>
+          <motion.div 
+            className="flex gap-4 items-center flex-col sm:flex-row mt-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+          >
+            {[
+              { href: "/about", text: "About Us", variant: "primary" },
+              { href: "/projects", text: "View Our Projects", variant: "primary" },
+              { href: "/contact", text: "Get in Touch", variant: "secondary" }
+            ].map((button, index) => (
+              <motion.div
+                key={button.href}
+                variants={buttonVariants}
+                initial="initial"
+                animate="animate"
+                whileHover="hover"
+                whileTap="tap"
+                transition={{ 
+                  duration: 0.2,
+                  delay: index * 0.1 + 0.4
+                }}
+              >
+                <Link 
+                  href={button.href} 
+                  className={`rounded-full border border-solid transition-all flex items-center justify-center gap-2 text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 ${
+                    button.variant === 'primary' 
+                      ? 'border-transparent bg-foreground text-background hover:bg-[#383838] hover:text-white dark:hover:bg-[#ccc]' 
+                      : 'border-black/[.08] dark:border-white/[.145] hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent sm:min-w-44'
+                  }`}
+                >
+                  {button.text}
+                </Link>
+              </motion.div>
+            ))}
+          </motion.div>
         </main>
 
         <Footer />
