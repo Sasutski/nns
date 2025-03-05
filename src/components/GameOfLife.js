@@ -5,16 +5,30 @@ const GameOfLife = () => {
   const canvasRef = useRef(null);
   const [dimensions, setDimensions] = useState({ width: 800, height: 600 });
 
+  const isDarkMode = () => {
+    if (typeof window === 'undefined') return false;
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  };
+
   useEffect(() => {
     const handleResize = () => {
       setDimensions({ width: window.innerWidth, height: window.innerHeight });
     };
 
+    const handleThemeChange = () => {
+      // Force a re-render when theme changes
+      setDimensions(prev => ({ ...prev }));
+    };
+
     handleResize(); // Set initial dimensions
+    
     window.addEventListener('resize', handleResize);
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    mediaQuery.addListener(handleThemeChange);
 
     return () => {
       window.removeEventListener('resize', handleResize);
+      mediaQuery.removeListener(handleThemeChange);
     };
   }, []);
 
@@ -88,7 +102,11 @@ const GameOfLife = () => {
           const cell = grid[col][row];
           ctx.beginPath();
           ctx.rect(col * resolution, row * resolution, resolution, resolution);
-          ctx.fillStyle = cell ? 'rgba(0, 0, 0, 0.1)' : 'rgba(255, 255, 255, 0.03)';
+          if (isDarkMode()) {
+            ctx.fillStyle = cell ? 'rgba(255, 255, 255, 0.1)' : 'rgba(255, 255, 255, 0.02)';
+          } else {
+            ctx.fillStyle = cell ? 'rgba(0, 0, 0, 0.1)' : 'rgba(255, 255, 255, 0.03)';
+          }
           ctx.fill();
         }
       }
@@ -101,7 +119,14 @@ const GameOfLife = () => {
     };
   }, [dimensions]);
 
-  return <canvas ref={canvasRef} width={dimensions.width} height={dimensions.height} className="absolute top-0 left-0 w-full h-full z-0" />;
+  return (
+    <canvas 
+      ref={canvasRef} 
+      width={dimensions.width} 
+      height={dimensions.height} 
+      className="absolute top-0 left-0 w-full h-full z-0" 
+    />
+  );
 };
 
 export default GameOfLife;
