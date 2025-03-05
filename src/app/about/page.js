@@ -139,9 +139,10 @@ const About = () => {
       <main className="flex flex-col gap-8 row-start-2 items-center w-full max-w-7xl">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold mb-4">About Us</h1>
+          <h1 className="text-4xl font-bold mb-4">{`About Us`}</h1>
           <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            We're a small team passionate about creating meaningful solutions through technology. 
-            Our projects aim to make a positive impact in people's lives.
+            {`We're a small team passionate about creating meaningful solutions through technology. 
+            Our projects aim to make a positive impact in people's lives.`}
           </p>
         </div>
 
