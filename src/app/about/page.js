@@ -143,9 +143,9 @@ const About = () => {
   const teamMembers = [
     {
       name: "NoobGrinder420",
-      role: "Tech Lead",
+      role: "Dhanvin RM",
       image: "/noobgrinder.png",
-      bio: "Tech wizard specializing in full-stack development with a passion for creating efficient and scalable solutions.",
+      bio: "He might just be a guy who needs to be sent to the mental hospital. But he's also a developer.",
       projects: [
         { name: "QR Code Gen - QR Code Gen from terminal", url: "https://github.com/NoobGrinder420/QR-code-gen" },
         { name: "PyGit - Own Git using Python", url: "https://github.com/NoobGrinder420/PyGit" },
@@ -158,9 +158,9 @@ const About = () => {
     },
     {
       name: "Natalie",
-      role: "Design Lead",
+      role: "Charles",
       image: "/natalie.jpeg",
-      bio: "Creative designer with an eye for detail and a passion for creating beautiful, user-friendly interfaces.",
+      bio: "The brains, the brawn, but certainly not the beauty. A Developer who thinks he's funny.",
       projects: [
         { name: "Meower - A git wrapper made in python", url: "https://github.com/ellipticobj/meower" },
         { name: "Sigmalang - A language as close to natural language as possible ", url: "https://github.com/dimini171/sigma" },
@@ -173,9 +173,9 @@ const About = () => {
     },
     {
       name: "Sasutski",
-      role: "Strategy Lead",
+      role: "James Tan",
       image: "/sasutski.png",
-      bio: "Strategic thinker focused on product development and team coordination.",
+      bio: "A Developer who might just have a better sense of style than the other two. That's a really low bar honestly.",
       projects: [
         { name: "SSTInc Stupidathon - Something stupid", url: "https://github.com/Sasutski/stupidathon" },
         { name: "Thank you website for my senior Isabelle", url: "https://github.com/Sasutski/isabelle" },
